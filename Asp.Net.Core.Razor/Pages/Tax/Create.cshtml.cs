@@ -8,27 +8,27 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Asp.Net.Core.Razor.Api.Data;
 using Asp.Net.Core.Razor.Models;
 
-namespace Asp.Net.Core.Razor.Pages.Taxes
+namespace Asp.Net.Core.Razor.Pages.Tax
 {
     public class CreateModel : PageModel
     {
         private readonly Asp.Net.Core.Razor.Api.Data.PersonalTaxesDBContext _context;
-        public IEnumerable<string> taxCodeValues;
+        public List<SelectListItem> taxCodeValues;
 
         public CreateModel(Asp.Net.Core.Razor.Api.Data.PersonalTaxesDBContext context)
         {
-            _context = context;            
+            _context = context;
+            taxCodeValues = new List<SelectListItem>()
+            {
+                new SelectListItem() { Value = TaxCodeTypes.FlatRate, Text = TaxCodeTypes.FlatRate },
+                new SelectListItem() { Value = TaxCodeTypes.FlatValue, Text = TaxCodeTypes.FlatValue },
+                new SelectListItem() { Value = TaxCodeTypes.ProgressiveA, Text =TaxCodeTypes.ProgressiveA },
+                new SelectListItem() { Value = TaxCodeTypes.PorgressiveB, Text = TaxCodeTypes.PorgressiveB }
+            };
         }
 
         public IActionResult OnGet()
         {
-            taxCodeValues =new List<string>()
-            {
-                TaxCodeTypes.FlatRate,
-                TaxCodeTypes.FlatValue,
-                TaxCodeTypes.ProgressiveA,
-                TaxCodeTypes.PorgressiveB
-            };
             return Page();
         }
 

@@ -8,18 +8,17 @@ using Microsoft.EntityFrameworkCore;
 using Asp.Net.Core.Razor.Api.Data;
 using Asp.Net.Core.Razor.Models;
 
-namespace Asp.Net.Core.Razor.Pages.Taxes
+namespace Asp.Net.Core.Razor.Pages.Tax
 {
-    public class DeleteModel : PageModel
+    public class DetailsModel : PageModel
     {
         private readonly Asp.Net.Core.Razor.Api.Data.PersonalTaxesDBContext _context;
 
-        public DeleteModel(Asp.Net.Core.Razor.Api.Data.PersonalTaxesDBContext context)
+        public DetailsModel(Asp.Net.Core.Razor.Api.Data.PersonalTaxesDBContext context)
         {
             _context = context;
         }
 
-        [BindProperty]
         public PersonalTax PersonalTax { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
@@ -36,24 +35,6 @@ namespace Asp.Net.Core.Razor.Pages.Taxes
                 return NotFound();
             }
             return Page();
-        }
-
-        public async Task<IActionResult> OnPostAsync(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            PersonalTax = await _context.PersonalTaxes.FindAsync(id);
-
-            if (PersonalTax != null)
-            {
-                _context.PersonalTaxes.Remove(PersonalTax);
-                await _context.SaveChangesAsync();
-            }
-
-            return RedirectToPage("./Index");
         }
     }
 }

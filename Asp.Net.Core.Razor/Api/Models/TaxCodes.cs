@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace Asp.Net.Core.Razor.Models
 {
+    /// <summary>
+    /// Kind of a enum with two string values to keep the bugs at bay with taxcodes.
+    /// </summary>
     public class TaxCodeTypes
     {
         public const string ProgressiveA = "7441";

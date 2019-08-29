@@ -4,18 +4,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Asp.Net.Core.Razor.Api.Data;
 using Asp.Net.Core.Razor.Models;
 
-namespace Asp.Net.Core.Razor.Pages.Taxes
+namespace Asp.Net.Core.Razor.Pages.Tax
 {
-    public class EditModel : PageModel
+    public class DeleteModel : PageModel
     {
         private readonly Asp.Net.Core.Razor.Api.Data.PersonalTaxesDBContext _context;
 
-        public EditModel(Asp.Net.Core.Razor.Api.Data.PersonalTaxesDBContext context)
+        public DeleteModel(Asp.Net.Core.Razor.Api.Data.PersonalTaxesDBContext context)
         {
             _context = context;
         }
@@ -39,37 +38,22 @@ namespace Asp.Net.Core.Razor.Pages.Taxes
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int? id)
         {
-            if (!ModelState.IsValid)
+            if (id == null)
             {
-                return Page();
+                return NotFound();
             }
 
-            _context.Attach(PersonalTax).State = EntityState.Modified;
+            PersonalTax = await _context.PersonalTaxes.FindAsync(id);
 
-            try
+            if (PersonalTax != null)
             {
+                _context.PersonalTaxes.Remove(PersonalTax);
                 await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PersonalTaxExists(PersonalTax.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
             }
 
             return RedirectToPage("./Index");
-        }
-
-        private bool PersonalTaxExists(int id)
-        {
-            return _context.PersonalTaxes.Any(e => e.Id == id);
         }
     }
 }

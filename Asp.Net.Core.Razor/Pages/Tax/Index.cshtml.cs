@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Asp.Net.Core.Razor.Api.Data;
 using Asp.Net.Core.Razor.Models;
 
-namespace Asp.Net.Core.Razor.Pages.Taxes
+namespace Asp.Net.Core.Razor.Pages.Tax
 {
     public class IndexModel : PageModel
     {

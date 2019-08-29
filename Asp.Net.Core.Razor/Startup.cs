@@ -36,7 +36,11 @@ namespace Asp.Net.Core.Razor
             });
 
             services.AddDbContext<PersonalTaxesDBContext>(opts => opts.UseSqlServer(Configuration["ConnectionStrings:PersonalTaxesDB"]));
+            
+            // Registering custom services to be injected
             services.AddScoped<IDataRepository<PersonalTax>, PersonalTaxesData>();
+            services.AddScoped<ICalculate, TaxLogic>();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

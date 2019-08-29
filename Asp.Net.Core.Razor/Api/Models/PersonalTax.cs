@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Asp.Net.Core.Razor.Models
 {
+    /// <summary>
+    /// Model that is used to save to the database
+    /// </summary>
     public class PersonalTax
     {
         [Key]
@@ -14,11 +17,13 @@ namespace Asp.Net.Core.Razor.Models
         [Required]
         public string PostalCode { get; set; }
 
-        [Required] 
-        public Double TaxableIncome { get; set; }
+        [Required]
+        [Range(0.0, Double.MaxValue)]
+        public Decimal TaxableIncome { get; set; }
 
         [Required]
         public DateTime LogTime { get; set; }
+        public Decimal Tax { get; set; }
                 
     }
 }

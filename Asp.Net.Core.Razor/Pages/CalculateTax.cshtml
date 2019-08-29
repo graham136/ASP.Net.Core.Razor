@@ -3,5 +3,65 @@
 @{
 }
 
-<h2><b>Calulate Tax</b></h2>
+@{
+    ViewData["Title"] = "Calculate Personal Tax";
+}
 
+
+<h2><b>Calulate Tax</b></h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="PersonalTax.Id" />
+            <div class="form-group">
+                <label asp-for="PersonalTax.PostalCode" class="control-label"></label>
+                <select asp-for="PersonalTax.PostalCode" asp-items="@Model.taxCodeValues" class="form-control"></select>
+                <span asp-validation-for="PersonalTax.PostalCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PersonalTax.TaxableIncome" class="control-label"></label>
+                <input asp-for="PersonalTax.TaxableIncome" class="form-control" />
+                <span asp-validation-for="PersonalTax.TaxableIncome" class="text-danger"></span>
+            </div>
+            <div>
+                <label class="control-label">Calculated Tax</label>
+                <input id="calculatedTax" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="button" asp-page-handler="Calculate" value="Calculate" class="btn btn-info" id="onCalculateButton" />
+            </div>           
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+<script src="https://code.jquery.com/jquery-3.1.1.js"
+        integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+        crossorigin="anonymous"></script>
+<script>
+    
+    $('#onCalculateButton').click(function () {
+        var model = $('form').serialize();
+        $.ajax({
+            url: "api/PersonalTax/Calculate",
+            type: "Get",
+            data:  model ,
+            cache: false,
+            async: true,
+            success: function (data) {
+                $("#calculatedTax").val(data);
+                console.log(data);
+            }
+        });
+    });
+
+</script>

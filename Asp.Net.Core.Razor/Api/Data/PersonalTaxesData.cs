@@ -7,12 +7,13 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace Asp.Net.Core.Razor.Api.Data
-{
+{   
+    
     public class PersonalTaxesData : IDataRepository<PersonalTax>
     {
         private PersonalTaxesDBContext _personalTaxesDbContext;
 
-
+        // Injecting the EF Core dbcontext
         public PersonalTaxesData(PersonalTaxesDBContext context)
         {
             _personalTaxesDbContext = context;
@@ -21,41 +22,7 @@ namespace Asp.Net.Core.Razor.Api.Data
         {
             //Adding this just so that there is sometihng to display for you guys.
             IEnumerable<PersonalTax> tempTaxes = _personalTaxesDbContext.PersonalTaxes.ToList();
-            if (!tempTaxes.Any())
-            {
-                tempTaxes = new List<PersonalTax>()
-                {
-                    new PersonalTax()
-                    {
-                        Id =0,
-                        PostalCode=TaxCodeTypes.FlatRate,
-                        TaxableIncome=100000,
-                        LogTime=DateTime.Now
-                    },
-                    new PersonalTax()
-                    {
-                        Id =2,
-                        PostalCode=TaxCodeTypes.FlatValue,
-                        TaxableIncome=100000,
-                        LogTime=DateTime.Now
-                    },
-                    new PersonalTax()
-                    {
-                        Id =3,
-                        PostalCode=TaxCodeTypes.ProgressiveA,
-                        TaxableIncome=100000,
-                        LogTime=DateTime.Now
-                    },
-                    new PersonalTax()
-                    {
-                        Id =4,
-                        PostalCode=TaxCodeTypes.PorgressiveB,
-                        TaxableIncome=100000,
-                        LogTime=DateTime.Now
-                    }
-                };
-            }
-
+           
             return _personalTaxesDbContext.PersonalTaxes.ToList();
         }
         public void Add(PersonalTax entity)

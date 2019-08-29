@@ -15,8 +15,9 @@ namespace Asp.Net.Core.Razor.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     PostalCode = table.Column<string>(nullable: false),
-                    TaxableIncome = table.Column<double>(nullable: false),
-                    LogTime = table.Column<DateTime>(nullable: false)
+                    TaxableIncome = table.Column<decimal>(nullable: false),
+                    LogTime = table.Column<DateTime>(nullable: false),
+                    Tax = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {

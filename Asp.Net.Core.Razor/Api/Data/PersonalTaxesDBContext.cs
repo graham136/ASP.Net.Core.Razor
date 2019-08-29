@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace Asp.Net.Core.Razor.Api.Data
 {
+    // Entity framework core DBContext connecting to SQL server localdb
+    // Type update-database in the nuget package manager to create your local db.
     public class PersonalTaxesDBContext : DbContext
     {
 

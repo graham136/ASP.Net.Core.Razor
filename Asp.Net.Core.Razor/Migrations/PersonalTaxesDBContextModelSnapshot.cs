@@ -30,7 +30,9 @@ namespace Asp.Net.Core.Razor.Migrations
                     b.Property<string>("PostalCode")
                         .IsRequired();
 
-                    b.Property<double>("TaxableIncome");
+                    b.Property<decimal>("Tax");
+
+                    b.Property<decimal>("TaxableIncome");
 
                     b.HasKey("Id");
 
