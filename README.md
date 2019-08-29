@@ -8,13 +8,15 @@
 <p>    "PersonalTaxesDB": "Server=(localdb)\\mssqllocaldb;database=PersonalTaxesDB;Trusted_Connection=True;"</p>
 <p>  }</p>
 
+<p>Please ensure you have MssqlLocalDB extension installed for mssqlserver.</p>
+
 <p>Please add a migration in nuget package manager console</p>
 <p>"Add-Migration Asp.Net.Core.Razor.Models.PersonalTax"</p>
 
 <p>Update your database in nuget package manger. </p>
 <p>"update-database"</p>
 
-<p>The database should be created. Please build and run the app.</p>
+<p>The local database should be created. Please build and run the app.</p>
 
 <h1><b>Requirements</b></h1>
 <p>Write a tax calculator using TDD - please checkout my tests project for logic and controller tests</p>
